@@ -40,5 +40,18 @@ As the first step, we will set the github actions to build a docker container. Y
 - Execute github actions once, so that a docker image is created and pushed to docker registry. We will be using this image in the next steps.
 
 
+# Register Docker Registry in gopaddle
+We will be using the image created in earlier step to deploy an application in gopaddle. Once an application is deployed, we can perform further rolling updates on that application. We can automate this initial deployment process as well using gopaddle APIs. But for the time being, we will manually deploy an application using gopaddle UI. To create the gopaddle artifacts, Docker Registry has to be registered with gopaddle, so that gopaddle knows the source from which a docker image can be pulled and deployed.
+
+- Register the Azure Registry in gopaddle as described [here](https://help.gopaddle.io/en/articles/3942974-adding-a-docker-registry).
+
+# Create necessary artifacts in gopaddle and deploy the service on a Kubernetes environment
+
+- We need to create 3 resources in gopaddle.
+  - **Container:** Create an image based container in gopaddle using the image created in the earlier step as described here. Once the container is created, note down the container ID by viewing the container and extracting the ID from the browser URL.
+  - **Service:** Create a Service and add the container to the service as described here. Once the service is created, note down the service ID by viewing the service and extracting the ID from the browser URL.
+  - **Deployment Template:** Create a Deployment Template and add the Service to the template.
+
+
 
 
