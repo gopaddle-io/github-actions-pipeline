@@ -30,7 +30,7 @@ jobs:
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@master
         with:
-          url: "https://portal.gopaddle.io/gateway/v1/application/appsa8218974c6043c4fd2cbd9ac6a71035fcbcf"
+          url: "https://portal.gopaddle.io/gateway/v1/prjsa8218974c6043c4fd2cbd9ac6a71035fmfj/application/appsa8218974c6043c4fd2cbd9ac6a71035fcbcf"
           method: "PUT"
           bearerToken: ${{ secrets.BEARER_TOKEN }}
           data: '{"updateType":"buildUpdate","deploymentTemplateVersion":"draft","serviceGroups":[{"name":"spring-petclinic","id":"sg63e2f795sg62e6sg4cd7sgbaefsg4e572ff17787","version":"draft","services":[{"id":"svcea1ce6dcdccaccc4c64cabbec84f5b0f495ee","serviceVersion":"draft","releaseConfig":{"image":"${{ secrets.REGISTRY_LOGIN_SERVER }}/petclinic:${{ github.sha }}"}}],"description":"${{ env.DESC }}"}]}'
