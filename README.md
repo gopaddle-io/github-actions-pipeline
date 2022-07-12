@@ -19,5 +19,7 @@ As the first step, we will set the github actions to build a docker container. Y
   - **REGISTRY_LOGIN_SERVER**
   - **REGISTRY_USERNAME**
   - **REGISTRY_PASSWORD**
+  
+  ![](/assets/images/githubsecret.png)
 
 
