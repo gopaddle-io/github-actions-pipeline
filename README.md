@@ -21,5 +21,24 @@ As the first step, we will set the github actions to build a docker container. Y
   - **REGISTRY_PASSWORD**
   
   ![](/assets/images/githubsecret.png)
+  
+  
+- Now let us create the .github/workflows folder in the repository. Go to the workflow tab and create the yaml file to build your source code. Your github actions task would look like this to build and push the image to the docker registry. petclinic is the name of the docker image and we will use the github commit ID as the docker image tag. By using the commit ID as the tag, we can relate the docker image to the commit that triggered the build for future debugging.
+
+```
+    - name: 'Build and push image'
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/petclinic:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/petclinic:${{ github.sha }}
+ ```
+ 
+- Execute github actions once, so that a docker image is created and pushed to docker registry. We will be using this image in the next steps.
+
+
 
 
