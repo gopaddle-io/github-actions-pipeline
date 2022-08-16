@@ -5,7 +5,7 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
 
 Here are some simple steps to follow:
 
-- **Create Github Actions**
+## Create Github Actions: 
 - **Register Docker Registry in gopaddle**
 - **Create an Image based container in gopaddle**
 - **Create necessary artifacts in gopaddle and deploy the service on a Kubernetes environment**
