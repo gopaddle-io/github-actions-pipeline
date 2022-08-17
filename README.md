@@ -78,6 +78,17 @@ create those secrets in the repository. Goto the **Settings > Secrets > Actions 
 
 ![New Secret Repository](/assets/images/githubsecret.png)
 
+login into 
+
+```
+- name: "Build and push image"
+  uses: azure/docker-login@v1
+  with:
+    login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+    username: ${{ secrets.REGISTRY_USERNAME }}
+    password: ${{ secrets.REGISTRY_PASSWORD }}
+```
+
 
 
 
