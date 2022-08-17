@@ -25,9 +25,9 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
  Then we have to specify when event have to triggered. here we are going to trigger the pipeline every time the source code is updated.
  
  ```
-    on:
-      push:
-        branches: [main]
+on:
+  push:
+    branches: [main]
   ```
   
   This part is actually a Actions Part that contains three steps: 
@@ -48,18 +48,44 @@ jobs:
   
 ```
 steps:
-      - uses: actions/checkout@v2
+  - uses: actions/checkout@v2
 ```
 
  Install and setup the Java JDK to build the source code
  
  ```
  - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
+   uses: actions/setup-java@v1
+   with:
+    java-version: 1.8
  ```
  
+ Build the source code with maven
+ ```
+ - name: Build with Maven
+   run: mvn -B package --file pom.xml
+ ```
+ Now the build process is complete. next we are going to push the image to registry.
+ 
+ ## Create the Image and push it into the Azure Registry
+ 
+ Add the credentials for your Azure Registry in this repository.
+- REGISTRY_LOGIN_SERVER
+- REGISTRY_USERNAME
+- REGISTRY_PASSWORD
+
+create those secrets in the repository. Goto the **Settings > Secrets > Actions > New secret repository**
+
+
+
+
+  Prepare the docker image using the given Dockerfile. you can change the contents of the Dockerfile as per your project.
+  
+ ```
+ 
+  
+ 
+
     
   
   
