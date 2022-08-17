@@ -6,7 +6,7 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
   Here we are going to set up the pipeline to build the source code and push the image into the Azure Container Registry. Rolling update the image into the running application in the gopaddle.
 
 
-## Here are some simple steps to follow:
+## Here are some simple steps to follow
 
   First we have to create the workflow at the source code repository, for examble we are using spring-petclinic repository in this. fork the repository to your acclount and select the repository. create the **.github/workflows/main.yaml** file. copy the code from the same file from this repository.
   
@@ -35,15 +35,31 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
   - **Create the Image and push it into the Azure Registry**
   - **Rolling Update the Image at the gopaddle**
 
-## Building the Source Code: 
+## Building the Source Code
 
-  create the build job using the follwing command, the job will run on the Ubuntu machine. you can specify the os as per your requirement.
+  Create the build job using the follwing command, the job will run on the Ubuntu machine. you can specify the os as per your requirement.
   
 ```
 jobs:
   build:
     runs-on: ubuntu-latest
 ```    
+  Now we are going to add the steps to this job to build the spring-petclinic source code. we are going to check out the repository for workflow to access the source code.
+  
+```
+steps:
+      - uses: actions/checkout@v2
+```
+
+ Install and setup the Java JDK to build the source code
+ 
+ ```
+ - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+ ```
+ 
     
   
   
