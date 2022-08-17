@@ -19,6 +19,10 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
 
 ## Building the Source Code: 
 
+  First part of the **main.yaml** is to name the Workflow pipeline 
+ ```name: Java CI with Maven```
+  
+
 
 
 
