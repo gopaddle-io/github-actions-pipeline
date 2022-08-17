@@ -10,24 +10,42 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
 
   First we have to create the workflow at the source code repository, for examble we are using spring-petclinic repository in this. fork the repository to your acclount and select the repository. create the **.github/workflows/main.yaml** file. copy the code from the same file from this repository.
   
-  There are three steps in this pipeline:
-  - **Building the Source Code**
-  - **Create the Image and push it into the Azure Registry**
-  - **Rolling Update the Image at the gopaddle**
+  
     
   
 
-## Building the Source Code: 
+
 
   First part of the **main.yaml** is to name the Workflow pipeline 
  
- ```name: Java CI with Maven```
+ ```
+ name: Java CI with Maven
+ ```
  
  Then we have to specify when event have to triggered. here we are going to trigger the pipeline every time the source code is updated.
  
- ```on:
-  push:
-    branches: [main]```
+ ```
+    on:
+      push:
+        branches: [main]
+  ```
+  
+  This part is actually a Actions Part that contains three steps: 
+  - **Building the Source Code**
+  - **Create the Image and push it into the Azure Registry**
+  - **Rolling Update the Image at the gopaddle**
+
+## Building the Source Code: 
+
+  create the build job using the follwing command, the job will run on the Ubuntu machine. you can specify the os as per your requirement.
+  
+```
+jobs:
+  build:
+    runs-on: ubuntu-latest
+```    
+    
+  
   
 
 
