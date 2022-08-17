@@ -106,6 +106,18 @@ Login into Azure Container Registry
   - run: echo "DESC=$(echo -n ${{ github.event.head_commit.message }} | base64)" >> $GITHUB_ENV
   ```
   
+  ## Rolling Update the Image at the gopaddle
+  
+  Now we are going to rolling update the application in gopaddle using API.
+  we need following information from the gopaddle.
+- Container ID
+- Service ID
+- Application ID
+- API Token
+
+
+  
+  
   
         
  
