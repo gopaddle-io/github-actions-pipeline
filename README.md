@@ -78,7 +78,7 @@ create those secrets in the repository. Goto the **Settings > Secrets > Actions 
 
 ![New Secret Repository](/assets/images/githubsecret.png)
 
-login into 
+Login into Azure Container Registry
 
 ```
 - name: "Build and push image"
@@ -92,9 +92,23 @@ login into
 
 
 
-  Prepare the docker image using the given Dockerfile. you can change the contents of the Dockerfile as per your project.
+  Prepare the docker image using the given Dockerfile. you can change the contents of the Dockerfile as per your project. push the image into the registry
   
  ```
+ - run: |
+    docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/petclinic:${{ github.sha }}
+    docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/petclinic:${{ github.sha }}
+ ```
+ 
+  Get the Commit information for rolling update description.
+  
+  ```
+  - run: echo "DESC=$(echo -n ${{ github.event.head_commit.message }} | base64)" >> $GITHUB_ENV
+  ```
+  
+  
+        
+ 
  
   
  
