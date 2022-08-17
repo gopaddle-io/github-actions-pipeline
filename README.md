@@ -12,7 +12,7 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
   
   There are three steps in this pipeline:
   
-    - **Building the Source Code**
+    -**Building the Source Code**
     - **Create the Image and push it into the Azure Registry**
     - **Rolling Update the Image at the gopaddle**
     
