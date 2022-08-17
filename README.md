@@ -76,6 +76,8 @@ steps:
 
 create those secrets in the repository. Goto the **Settings > Secrets > Actions > New secret repository**
 
+![New Secret Repository](/assets/images/githubsecret.png)
+
 
 
 
