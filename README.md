@@ -20,7 +20,14 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
 ## Building the Source Code: 
 
   First part of the **main.yaml** is to name the Workflow pipeline 
+ 
  ```name: Java CI with Maven```
+ 
+ Then we have to specify when event have to triggered. here we are going to trigger the pipeline every time the source code is updated.
+ 
+ ```on:
+  push:
+    branches: [main]```
   
 
 
