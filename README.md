@@ -11,10 +11,9 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
   First we have to create the workflow at the source code repository, for examble we are using spring-petclinic repository in this. fork the repository to your acclount and select the repository. create the **.github/workflows/main.yaml** file. copy the code from the same file from this repository.
   
   There are three steps in this pipeline:
-  
-    -**Building the Source Code**
-    - **Create the Image and push it into the Azure Registry**
-    - **Rolling Update the Image at the gopaddle**
+  - **Building the Source Code**
+  - **Create the Image and push it into the Azure Registry**
+  - **Rolling Update the Image at the gopaddle**
     
   
 
