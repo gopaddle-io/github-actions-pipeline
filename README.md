@@ -11,7 +11,7 @@ As a pre-requisite, an application must be deployed in gopaddle. Below flow char
 
 ![](/assets/images/github-actions.png)
 
-Since we are building a pipeline for an application deployed in gopaddle, we must first initialize and deploy an application in gopaddle before we move on to creating the pipeline in Azure DevOps.
+Since we are building a pipeline for an application deployed in gopaddle, we must first initialize and deploy an application in gopaddle before we move on to creating the pipeline in Github Actions.
 
 + Subscribe to gopaddle - If you do not have a gopaddle subscription yet, subscribe to the [gopaddle portal](https://portal.gopaddle.io/signUp)
 + [Provision K8s in gopaddle](https://help.gopaddle.io/en/articles/3942973-registering-a-cloud-account)
@@ -20,7 +20,7 @@ Since we are building a pipeline for an application deployed in gopaddle, we mus
 + Initialize and deploy the project using gopaddle
     + [Download and install gpctl](https://help.gopaddle.io/en/articles/5116592-installing-and-configuring-gopaddle-command-line-utility) - Now, from your local desktop, download and install gpctl command line utility.
 	+ [Perform gpctl init](https://help.gopaddle.io/en/articles/5056807-initializing-a-microservice-from-scratch) - Auto-generate the Dockerfile and Kubernetes YAML, build docker images, and deploy the application.
-	+ capture the .gp file with the resource IDs - Once the application is onboarded using gopaddle, gpctl init creates a .gp file in the project folder which contains the ***apiToken***, ***containerID***, ***serviceID***, ***applicationID***, ***projectID***, ***releaseID*** and the ***distributionID***. Make a note of these IDs, as we will be using these in the Azure DevOps pipeline script.
+	+ capture the .gp file with the resource IDs - Once the application is onboarded using gopaddle, gpctl init creates a .gp file in the project folder which contains the ***apiToken***, ***containerID***, ***serviceID***, ***applicationID***, ***projectID***, ***releaseID*** and the ***distributionID***. Make a note of these IDs, as we will be using these in the Github Actions pipeline script.
 
 
 ## Getting Started
