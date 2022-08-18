@@ -9,7 +9,7 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
 
 As a pre-requisite, an application must be deployed in gopaddle. Below flow chart gives the step by step process to be followed before creating a Azure DevOps pipeline.
 
-![](/assets/images/githubactions.png)
+![](/assets/images/github-actions.png)
 
 Since we are building a pipeline for an application deployed in gopaddle, we must first initialize and deploy an application in gopaddle before we move on to creating the pipeline in Azure DevOps.
 
