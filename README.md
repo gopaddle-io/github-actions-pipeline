@@ -4,9 +4,26 @@ Gopaddle supports user to srtup the CI/DC pipeline through the Github Actions
 
 
   Here we are going to set up the pipeline to build the source code and push the image into the Azure Container Registry. Rolling update the image into the running application in the gopaddle.
+  
+ ## Pre-requisite
+
+As a pre-requisite, an application must be deployed in gopaddle. Below flow chart gives the step by step process to be followed before creating a Azure DevOps pipeline.
+
+![](https://gopaddle-marketing.s3.ap-southeast-2.amazonaws.com/azure-devops-pipeline-prerequisite.png)
+
+Since we are building a pipeline for an application deployed in gopaddle, we must first initialize and deploy an application in gopaddle before we move on to creating the pipeline in Azure DevOps.
+
++ Subscribe to gopaddle - If you do not have a gopaddle subscription yet, subscribe to the [gopaddle portal](https://portal.gopaddle.io/signUp)
++ [Provision K8s in gopaddle](https://help.gopaddle.io/en/articles/3942973-registering-a-cloud-account)
++ [Add a Container Registry](https://help.gopaddle.io/en/articles/3942974-adding-a-docker-registry) - Add a Container registry to gopaddle, to push or pull Docker images
++ Clone the project locally - Clone the GitHub project to be containerized. 
++ Initialize and deploy the project using gopaddle
+    + [Download and install gpctl](https://help.gopaddle.io/en/articles/5116592-installing-and-configuring-gopaddle-command-line-utility) - Now, from your local desktop, download and install gpctl command line utility.
+	+ [Perform gpctl init](https://help.gopaddle.io/en/articles/5056807-initializing-a-microservice-from-scratch) - Auto-generate the Dockerfile and Kubernetes YAML, build docker images, and deploy the application.
+	+ capture the .gp file with the resource IDs - Once the application is onboarded using gopaddle, gpctl init creates a .gp file in the project folder which contains the ***apiToken***, ***containerID***, ***serviceID***, ***applicationID***, ***projectID***, ***releaseID*** and the ***distributionID***. Make a note of these IDs, as we will be using these in the Azure DevOps pipeline script.
 
 
-## Here are some simple steps to follow
+## Getting Started
 
   First we have to create the workflow at the source code repository, for examble we are using spring-petclinic repository in this. fork the repository to your acclount and select the repository. create the **.github/workflows/main.yaml** file. copy the code from the same file from this repository.
   
