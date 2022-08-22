@@ -95,6 +95,24 @@ create those secrets in the repository. Goto the **Settings > Secrets > Actions 
 
 ![New Secret Repository](/assets/images/githubsecret.png)
 
+Login into Docker Registry
+
+```
+- name: Login to DockerHub
+  uses: docker/login-action@v2
+  with:
+    username: ${{ secrets.DOCKERHUB_USERNAME }}
+    password: ${{ secrets.DOCKERHUB_TOKEN }}
+```
+	Prepare the docker image using the given Dockerfile. you can change the contents of the Dockerfile as per your project. push the image into the registry
+
+```
+ - run: |
+    docker build . -t petclinic:${{ github.sha }}
+    docker push petclinic:${{ github.sha }}
+ ```
+        
+
 Login into Azure Container Registry
 
 ```
@@ -105,9 +123,6 @@ Login into Azure Container Registry
     username: ${{ secrets.REGISTRY_USERNAME }}
     password: ${{ secrets.REGISTRY_PASSWORD }}
 ```
-
-
-
 
   Prepare the docker image using the given Dockerfile. you can change the contents of the Dockerfile as per your project. push the image into the registry
   
