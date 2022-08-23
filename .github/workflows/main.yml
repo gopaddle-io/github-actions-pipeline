@@ -8,13 +8,13 @@ on:
     branches: [main]
   
 env:
-  endPoint: "https://portal.gopaddle.io"
-  projectID: "prjsa8218974c6043c4fd2cbd9ac6a71035fmfj"
-  applicationID: "appsa8218974c6043c4fd2cbd9ac6a71035fcbcf"
-  serviceGroupName: "spring-petclinic"
-  serviceGroupID: "sg63e2f795sg62e6sg4cd7sgbaefsg4e572ff17787"
-  serviceID: "svcea1ce6dcdccaccc4c64cabbec84f5b0f495ee"
-  imageName: "petclinic"
+  endPoint: "<gopaddle_endpoint>"
+  projectID: "<project_id>"
+  applicationID: "<application_id>"
+  serviceName: "<service_name>"
+  serviceID: "<service_id>"
+  containerID: <container_id>
+  imageName: "<image_name>"
   
   
 jobs:
@@ -43,5 +43,5 @@ jobs:
         with:
           url: "${{ env.endPoint }}/gateway/v1/${{ env.projectID }}/application/${{ env.applicationID }}"
           method: "PUT"
-          bearerToken: ${{ secrets.BEARER_TOKEN }}
-          data: '{"updateType":"buildUpdate","deploymentTemplateVersion":"draft","serviceGroups":[{"name":"${{ env.serviceGroupName }}","id":"${{ env.serviceGroupID }}","version":"draft","services":[{"id":"${{ env.serviceID }}","serviceVersion":"draft","releaseConfig":{"image":"${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.imageName }}:${{ github.sha }}"}}],"description":"${{ env.DESC }}"}]}'
+          bearerToken: ${{ secrets.GP_API_TOKEN }}
+          data: '{"updateType":"buildUpdate","deploymentTemplateVersion":"draft","serviceGroups":[{"name":"${{ env.serviceName }}","id":"${{ env.serviceID }}","version":"draft","services":[{"id":"${{ env.containerID }}","serviceVersion":"draft","releaseConfig":{"image":"${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.imageName }}:${{ github.sha }}"}}],"description":"${{ env.DESC }}"}]}'
