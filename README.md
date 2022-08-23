@@ -95,6 +95,51 @@ create those secrets in the repository. Goto the **Settings > Secrets > Actions 
 
 ![New Secret Repository](/assets/images/githubsecret.png)
 
+Login into AWS Registry
+
+```
+- uses: actions/checkout@v2
+- uses: docker://ghcr.io/kciter/aws-ecr-action:latest
+  with:
+    access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+    repo: <repo_name>
+    region: <region>
+    tags: ${{ github.sha }}
+    create_repo: true
+    image_scanning_configuration: true
+  env:
+    REPOSITORY: <repo_name>
+    REGION: <region>
+  run: |
+    docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.$REGION.amazonaws.com/$REPOSITORY:$IMAGE_TAG .
+    docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.$REGION.amazonaws.com/$REPOSITORY:$IMAGE_TAG
+```
+
+Login into the Google Registry 
+```
+
+```
+
+Login into Docker Registry
+
+```
+- name: Login to DockerHub
+  uses: docker/login-action@v2
+  with:
+    username: ${{ secrets.DOCKERHUB_USERNAME }}
+    password: ${{ secrets.DOCKERHUB_TOKEN }}
+```
+	Prepare the docker image using the given Dockerfile. you can change the contents of the Dockerfile as per your project. push the image into the registry
+
+```
+ - run: |
+    docker build . -t petclinic:${{ github.sha }}
+    docker push petclinic:${{ github.sha }}
+ ```
+        
+
 Login into Azure Container Registry
 
 ```
@@ -105,9 +150,6 @@ Login into Azure Container Registry
     username: ${{ secrets.REGISTRY_USERNAME }}
     password: ${{ secrets.REGISTRY_PASSWORD }}
 ```
-
-
-
 
   Prepare the docker image using the given Dockerfile. you can change the contents of the Dockerfile as per your project. push the image into the registry
   
