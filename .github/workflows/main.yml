@@ -6,6 +6,17 @@ name: Java CI with Maven
 on:
   push:
     branches: [main]
+  
+env:
+  endPoint: "https://portal.gopaddle.io"
+  projectID: "prjsa8218974c6043c4fd2cbd9ac6a71035fmfj"
+  applicationID: "appsa8218974c6043c4fd2cbd9ac6a71035fcbcf"
+  serviceGroupName: "spring-petclinic"
+  serviceGroupID: "sg63e2f795sg62e6sg4cd7sgbaefsg4e572ff17787"
+  serviceID: "svcea1ce6dcdccaccc4c64cabbec84f5b0f495ee"
+  imageName: "petclinic"
+  
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,13 +35,13 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/petclinic:${{ github.sha }}
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/petclinic:${{ github.sha }}
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.petclinic }}:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.petclinic }}:${{ github.sha }}
       - run: echo "DESC=$(echo -n ${{ github.event.head_commit.message }} | base64)" >> $GITHUB_ENV
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@master
         with:
-          url: "https://portal.gopaddle.io/gateway/v1/prjsa8218974c6043c4fd2cbd9ac6a71035fmfj/application/appsa8218974c6043c4fd2cbd9ac6a71035fcbcf"
+          url: "${{ env.endPoint }}/gateway/v1/${{ env.projectID }}/application/${{ env.applicationID }}"
           method: "PUT"
           bearerToken: ${{ secrets.BEARER_TOKEN }}
-          data: '{"updateType":"buildUpdate","deploymentTemplateVersion":"draft","serviceGroups":[{"name":"spring-petclinic","id":"sg63e2f795sg62e6sg4cd7sgbaefsg4e572ff17787","version":"draft","services":[{"id":"svcea1ce6dcdccaccc4c64cabbec84f5b0f495ee","serviceVersion":"draft","releaseConfig":{"image":"${{ secrets.REGISTRY_LOGIN_SERVER }}/petclinic:${{ github.sha }}"}}],"description":"${{ env.DESC }}"}]}'
+          data: '{"updateType":"buildUpdate","deploymentTemplateVersion":"draft","serviceGroups":[{"name":"${{ env.serviceGroupName }}","id":"${{ env.serviceGroupID }}","version":"draft","services":[{"id":"${{ env.serviceID }}","serviceVersion":"draft","releaseConfig":{"image":"${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.petclinic }}:${{ github.sha }}"}}],"description":"${{ env.DESC }}"}]}'
