@@ -95,6 +95,33 @@ create those secrets in the repository. Goto the **Settings > Secrets > Actions 
 
 ![New Secret Repository](/assets/images/githubsecret.png)
 
+Login into AWS Registry
+
+```
+- uses: actions/checkout@v2
+- uses: docker://ghcr.io/kciter/aws-ecr-action:latest
+  with:
+    access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+    repo: <repo_name>
+    region: <region>
+    tags: ${{ github.sha }}
+    create_repo: true
+    image_scanning_configuration: true
+  env:
+    REPOSITORY: <repo_name>
+    REGION: <region>
+  run: |
+    docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.$REGION.amazonaws.com/$REPOSITORY:$IMAGE_TAG .
+    docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.$REGION.amazonaws.com/$REPOSITORY:$IMAGE_TAG
+```
+
+Login into the Google Registry 
+```
+
+```
+
 Login into Docker Registry
 
 ```
