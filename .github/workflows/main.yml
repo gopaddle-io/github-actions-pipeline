@@ -35,8 +35,8 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.petclinic }}:${{ github.sha }}
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.petclinic }}:${{ github.sha }}
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.imageName }}:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.imageName }}:${{ github.sha }}
       - run: echo "DESC=$(echo -n ${{ github.event.head_commit.message }} | base64)" >> $GITHUB_ENV
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@master
@@ -44,4 +44,4 @@ jobs:
           url: "${{ env.endPoint }}/gateway/v1/${{ env.projectID }}/application/${{ env.applicationID }}"
           method: "PUT"
           bearerToken: ${{ secrets.BEARER_TOKEN }}
-          data: '{"updateType":"buildUpdate","deploymentTemplateVersion":"draft","serviceGroups":[{"name":"${{ env.serviceGroupName }}","id":"${{ env.serviceGroupID }}","version":"draft","services":[{"id":"${{ env.serviceID }}","serviceVersion":"draft","releaseConfig":{"image":"${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.petclinic }}:${{ github.sha }}"}}],"description":"${{ env.DESC }}"}]}'
+          data: '{"updateType":"buildUpdate","deploymentTemplateVersion":"draft","serviceGroups":[{"name":"${{ env.serviceGroupName }}","id":"${{ env.serviceGroupID }}","version":"draft","services":[{"id":"${{ env.serviceID }}","serviceVersion":"draft","releaseConfig":{"image":"${{ secrets.REGISTRY_LOGIN_SERVER }}/{{ env.imageName }}:${{ github.sha }}"}}],"description":"${{ env.DESC }}"}]}'
