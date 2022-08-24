@@ -119,7 +119,15 @@ Login into AWS Registry
 
 Login into the Google Registry 
 ```
-
+- name: Login to GCR
+  uses: docker/login-action@v2
+  with:
+    registry: gcr.io
+    username: _json_key
+    password: ${{ secrets.GCR_JSON_KEY }}
+- run: |
+    docker build . -t petclinic:${{ github.sha }}
+    docker push petclinic:${{ github.sha }}
 ```
 
 Login into Docker Registry
