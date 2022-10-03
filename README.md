@@ -198,6 +198,11 @@ using the information replace the values in the following API.
 
 
 
+## Maintainers
+This sample template is maintained by the <img src="https://i0.wp.com/blog.gopaddle.io/wp-content/uploads/2020/08/cropped-gopaddle.png?fit=512%2C512&ssl=1" width="17" height="17"> [gopaddle.io](https://gopaddle.io) team.
+
+
+
   
   
   
